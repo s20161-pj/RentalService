@@ -5,6 +5,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 @Service
@@ -18,13 +19,18 @@ public class RentalService {
     public MovieModel getMovie(Long movieId) {
         // url GET http://localhost:8080/1
         String url = this.MovieServiceUrl + movieId;
-        ResponseEntity<MovieModel> exchange = this.restTemplate.exchange(
-                url,
-                HttpMethod.GET,
-                HttpEntity.EMPTY,
-                MovieModel.class);
 
-        return exchange.getBody();
+        try{
+            ResponseEntity<MovieModel> exchange = this.restTemplate.exchange(
+                    url,
+                    HttpMethod.GET,
+                    HttpEntity.EMPTY,
+                    MovieModel.class);
+            return exchange.getBody();
+
+        } catch (Exception exception) {
+            throw exception;
+        }
     }
 
     public MovieModel changeAvailable(Long id) {
