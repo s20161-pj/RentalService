@@ -1,10 +1,14 @@
 package com.rental.service.model;
 
-public class MovieModel {
-    private Long id;
-    private String name;
-    private EnCategory category;
+import io.swagger.annotations.ApiModelProperty;
 
+public class MovieModel {
+    @ApiModelProperty(notes = "this is movie id", required = true, value = "movie id", example = "1")
+    private Long id;
+    @ApiModelProperty(notes = "this is movie name", required = true, value = "movie name", example = "Movie Title")
+    private String name;
+    @ApiModelProperty(notes = "this is movie category", required = true, value = "movie category", example = "HORROR")
+    private EnCategory category;
 
     private boolean isAvailable;
 
